@@ -180,40 +180,55 @@ class _loginpageState extends State<loginpage> {
   }
 
   Future<void> login() async {
-    final url = Uri.parse("https://dummyjson.com/auth/login");
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: convert.jsonEncode({
-        'username': usernamecontroller.text,
-        'password': passwordcontroller.text,
-      }),
-    );
-    if (response.statusCode == 200) {
-      final data = convert.jsonDecode(response.body);
-      print(response.body);
-      final token = data['accessToken'];
-      final prefs = await SharedPreferences.getInstance();
-      debugPrint(token);
-      await prefs.setString('token', token);
-      await getuserinfo(token);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Center(
-            child: Text("login successful", style: TextStyle(fontSize: 25)),
-          ),
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.all(10),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
+    try {
+      final url = Uri.parse("https://dummyjson.com/auth/login");
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: convert.jsonEncode({
+          'username': usernamecontroller.text,
+          'password': passwordcontroller.text,
+        }),
       );
-    } else {
+      if (response.statusCode == 200) {
+        final data = convert.jsonDecode(response.body);
+        print(response.body);
+        final token = data['accessToken'];
+        final prefs = await SharedPreferences.getInstance();
+        debugPrint(token);
+        await prefs.setString('token', token);
+        await getuserinfo(token);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Center(
+              child: Text("login successful", style: TextStyle(fontSize: 25)),
+            ),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Center(
+              child: Text("login failed", style: TextStyle(fontSize: 25)),
+            ),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.all(10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Center(
-            child: Text("login failed", style: TextStyle(fontSize: 25)),
+            child: Text('error : $e', style: TextStyle(fontSize: 25)),
           ),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.all(10),
