@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:login_api/pages/productListpage.dart';
 import 'package:login_api/pages/user_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,7 +28,7 @@ class _loginpageState extends State<loginpage> {
               width: double.infinity,
               height: 200,
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.blue,
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(45),
                 ),
@@ -37,6 +38,7 @@ class _loginpageState extends State<loginpage> {
                 child: Text(
                   "login",
                   style: TextStyle(
+                    fontFamily: 'font1',
                     color: Colors.white,
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -68,7 +70,7 @@ class _loginpageState extends State<loginpage> {
                         errorMaxLines: 2,
                         prefixIcon: Icon(
                           Icons.person,
-                          color: Colors.green,
+                          color: Colors.blue,
                           size: 30,
                         ),
                         fillColor: Colors.black12.withAlpha(10),
@@ -81,7 +83,7 @@ class _loginpageState extends State<loginpage> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.green, width: 3),
+                          borderSide: BorderSide(color: Colors.blue, width: 3),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -106,7 +108,7 @@ class _loginpageState extends State<loginpage> {
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.password,
-                          color: Colors.green,
+                          color: Colors.blue,
                           size: 30,
                         ),
                         suffixIcon: IconButton(
@@ -129,7 +131,7 @@ class _loginpageState extends State<loginpage> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.green, width: 3),
+                          borderSide: BorderSide(color: Colors.blue, width: 3),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -151,7 +153,7 @@ class _loginpageState extends State<loginpage> {
                         right: 100,
                         left: 100,
                       ),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.blue,
                       elevation: 4,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -167,6 +169,7 @@ class _loginpageState extends State<loginpage> {
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'font1',
                       ),
                     ),
                   ),
@@ -201,7 +204,10 @@ class _loginpageState extends State<loginpage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Center(
-              child: Text("login successful", style: TextStyle(fontSize: 25)),
+              child: Text(
+                "login successful",
+                style: TextStyle(fontSize: 25, fontFamily: 'font1'),
+              ),
             ),
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.all(10),
@@ -214,7 +220,10 @@ class _loginpageState extends State<loginpage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Center(
-              child: Text("login failed", style: TextStyle(fontSize: 25)),
+              child: Text(
+                "login failed",
+                style: TextStyle(fontSize: 25, fontFamily: 'font1'),
+              ),
             ),
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.all(10),
@@ -252,7 +261,7 @@ class _loginpageState extends State<loginpage> {
       await prefs.setString('user', convert.jsonEncode(userdata));
       Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => userpage()));
+      ).push(MaterialPageRoute(builder: (context) => productlistpage()));
     }
   }
 }

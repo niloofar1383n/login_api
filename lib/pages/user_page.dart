@@ -17,7 +17,7 @@ class userpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text("user information"),
       ),
@@ -29,36 +29,45 @@ class userpage extends StatelessWidget {
           }
           final user = snapshot.data as Map<String, dynamic>;
           final image = user['image'];
-          return ListView(
-            padding: EdgeInsets.all(16),
-            children: [
-              Text(
-                "name : ${user['firstName']} ",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "lastname : ${user['lastName']}",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Age : ${user['age']}",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "gender : ${user['gender']}",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "email : ${user['email']}",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "username : ${user['username']}",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+          return Padding(
+            padding: EdgeInsets.all(20),
+            child: ListView(
+              padding: EdgeInsets.all(16),
+              children: [
+                Text(
+                  "name : ${user['firstName']} ",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "lastname : ${user['lastName']}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Age : ${user['age']}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "gender : ${user['gender']}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "email : ${user['email']}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "username : ${user['username']}",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(height: 10),
 
-              Image.network(image),
-            ],
+                Image.network(image),
+              ],
+            ),
           );
         },
       ),
